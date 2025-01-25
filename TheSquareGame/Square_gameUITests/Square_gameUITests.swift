@@ -1,13 +1,13 @@
 //
-//  TheSquareGameUITests.swift
-//  TheSquareGameUITests
+//  Square_gameUITests.swift
+//  Square_gameUITests
 //
-//  Created by Sachithra 010 on 2024-12-15.
+//  Created by Udana 004 on 2024-12-15.
 //
 
 import XCTest
 
-final class TheSquareGameUITests: XCTestCase {
+final class Square_gameUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

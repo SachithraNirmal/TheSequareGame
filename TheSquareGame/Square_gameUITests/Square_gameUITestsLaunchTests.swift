@@ -1,13 +1,13 @@
 //
-//  TheSquareGameUITestsLaunchTests.swift
-//  TheSquareGameUITests
+//  Square_gameUITestsLaunchTests.swift
+//  Square_gameUITests
 //
-//  Created by Sachithra 010 on 2024-12-15.
+//  Created by Udana 004 on 2024-12-15.
 //
 
 import XCTest
 
-final class TheSquareGameUITestsLaunchTests: XCTestCase {
+final class Square_gameUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
