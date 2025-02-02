@@ -11,7 +11,7 @@ struct HomeView: View {
                         .foregroundColor(.white)
                         .padding()
                         .frame(width: 150, height: 50)
-                        .background(Color.blue)
+                        .background(Color.red)
                         .cornerRadius(10)
                 }
                 .padding()

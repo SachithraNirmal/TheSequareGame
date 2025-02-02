@@ -10,7 +10,9 @@ struct GridView: View {
     
     @State private var score: Int = 0
     @State private var highScore: Int = 0
+    @State private var highScorePlayer: String = ""  // New state for player's name
     @State private var showRestartButton: Bool = false
+    @State private var showingNamePrompt: Bool = false  // New state to show name prompt
     
     init() {
         _buttonColors = State(initialValue: generateButtonColors())
@@ -36,12 +38,20 @@ struct GridView: View {
     }
     
     func restartGame() {
-            score = 0
-            lastClickedButtonIndex = nil
-            clickedColor = nil
-            buttonColors = generateButtonColors()
-            showRestartButton = false
+        score = 0
+        lastClickedButtonIndex = nil
+        clickedColor = nil
+        buttonColors = generateButtonColors()
+        showRestartButton = false
+        showingNamePrompt = false  // Reset the name prompt
+    }
+    
+    func checkHighScore() {
+        if score > highScore {
+            highScore = score
+            showingNamePrompt = true // Show name prompt when breaking high score
         }
+    }
     
     var body: some View {
         VStack {
@@ -51,7 +61,7 @@ struct GridView: View {
                     .font(.title)
                     .padding()
                 Spacer()
-                Text("High Score: \(highScore)")
+                Text("High Score: \(highScore) by \(highScorePlayer)")
                     .font(.title)
                     .padding()
             }
@@ -77,10 +87,8 @@ struct GridView: View {
                                 self.clickedColor = nil
                             } else {
                                 // Mismatch, check and update high score, then reset score
-                                if score > highScore {
-                                    highScore = score
-                                }
-                            
+                                checkHighScore()
+                                
                                 score = 0
                                 showRestartButton = true
                                 // Update the clicked button and color
@@ -114,6 +122,36 @@ struct GridView: View {
                             .padding()
                             .frame(maxWidth: .infinity)
                             .background(Color.red)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                    .padding(.top, 20)
+                }
+            }
+            
+            // Show prompt for entering name if the high score was broken
+            if showingNamePrompt {
+                VStack {
+                    Text("New High Score! Enter your name:")
+                        .font(.title2)
+                        .padding()
+                    
+                    TextField("Enter your name", text: $highScorePlayer)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding()
+                        .frame(maxWidth: 300)
+                    
+                    Button(action: {
+                        // When the player enters a name, update the high score player and restart the game
+                        if !highScorePlayer.isEmpty {
+                            showingNamePrompt = false
+                        }
+                    }) {
+                        Text("Save Name")
+                            .font(.title2)
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(Color.green)
                             .foregroundColor(.white)
                             .cornerRadius(10)
                     }
